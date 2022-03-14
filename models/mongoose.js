@@ -1,0 +1,74 @@
+const mongoose = require('mongoose');
+
+mongoose.connect((process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/movie_review') , { useUnifiedTopology: true, useNewUrlParser: true })
+.then(db => console.log("Database connected"))
+.catch(err => console.log(err))
+
+const schema = mongoose.Schema;
+
+const userSchema = new schema({
+	username: {
+		type: String,
+		required: true
+	},
+	email: {
+		type: String,
+		unique: true,
+		required: true
+	},
+	password: {
+		type: String,
+		required: true
+	}
+})
+
+const commentSchema = new schema({
+    user : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
+    },
+    movie : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Movie'
+    },
+    commentText : {
+        type : String,
+        required : true
+    }
+})
+
+const movieSchema = new schema({
+    name : {
+        type : String,
+        required : true
+    },
+    year : {
+        type : Number,
+        required : true
+    },
+    description : {
+        type : String,
+        required : true
+    },
+    comments : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Comment'
+        }
+    ]
+})
+
+const userModel = new mongoose.model('User', userSchema);
+const commentModel = new mongoose.model('Comment', commentSchema);
+const movieModel = new mongoose.model('Movie', movieSchema);
+
+// (async function(){
+//     await commentModel.deleteMany();
+//     console.log("fedsf");
+// })()
+
+module.exports = {
+    userModel,
+    commentModel,
+    movieModel
+}
