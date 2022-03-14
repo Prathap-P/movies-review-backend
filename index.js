@@ -230,11 +230,4 @@ app.get('/logout', (req, res) => {
 
 app.use('/auth', authRouter);
 
-app.listen(9000, () => console.log('App running in port 9000'));
-
-
-//  /movies_list
-//  /add_movie
-//  /<movie_name>/add_comment
-//  /<movie_name>/delete_comment/
-//  /<movie_name>/update_comment/
+app.listen((process.env.PORT || 9000), () => console.log('App running in port 9000'));
