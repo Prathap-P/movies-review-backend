@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect((process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/movie_review') , { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect((process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/movie_review_test') , { useUnifiedTopology: true, useNewUrlParser: true })
 .then(db => console.log("Database connected"))
 .catch(err => console.log(err))
 
@@ -19,7 +19,11 @@ const userSchema = new schema({
 	password: {
 		type: String,
 		required: true
-	}
+	},
+    isAdmin : {
+        type : Boolean,
+        default : false
+    }
 })
 
 const commentSchema = new schema({
@@ -42,6 +46,10 @@ const movieSchema = new schema({
         type : String,
         required : true
     },
+    rating:{
+        type : Number,
+        required : true
+    },
     year : {
         type : Number,
         required : true
@@ -62,10 +70,22 @@ const userModel = new mongoose.model('User', userSchema);
 const commentModel = new mongoose.model('Comment', commentSchema);
 const movieModel = new mongoose.model('Movie', movieSchema);
 
-// (async function(){
-//     await commentModel.deleteMany();
-//     console.log("fedsf");
-// })()
+(async function(){
+    const users = await userModel.find();
+    const comments = await commentModel.find();
+    const movies = await movieModel.find();
+
+    // console.log(users);
+    // console.log(comments);
+    // console.log(movies);
+
+    // const admin = await userModel.findOne({ email : "admin@admin.com" });
+    // console.log(admin);
+    // admin.isAdmin = true;
+    // console.log(admin);
+    // await admin.save();
+
+})()
 
 module.exports = {
     userModel,

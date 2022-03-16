@@ -32,7 +32,7 @@ let isAdmin = async(req, res, next) => {
     try{
         const adminInfo = await models.userModel.findOne({ _id : res.locals.userId });
 
-        if(adminInfo.email !== 'admin@admin.com')
+        if(!adminInfo.isAdmin)
             throw new Error('Not an Admin');
 
         next()
