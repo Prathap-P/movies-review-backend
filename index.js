@@ -199,6 +199,7 @@ app.put('/movie/:movieId/:commentId', isAuthenticated, async(req, res) => {
     }
 })
 
+//Add movie to the db
 app.post('/add_movie', isAuthenticated, isAdmin, async(req, res) => {
     try{
         const movie_name= req.body.name, movie_year = req.body.year, movie_desc = req.body.description;
@@ -208,6 +209,7 @@ app.post('/add_movie', isAuthenticated, isAdmin, async(req, res) => {
             description : movie_desc
         })
 
+        // Saving the new movie to the db
         await newMovie.save();
 
         res.json({ success : 'true' });
@@ -221,6 +223,7 @@ app.post('/add_movie', isAuthenticated, isAdmin, async(req, res) => {
     }
 })
 
+//Logout the logged in user
 app.get('/logout', (req, res) => {
     res.clearCookie('jwt_token');
     res.send({
@@ -228,6 +231,7 @@ app.get('/logout', (req, res) => {
     });
 })
 
+//Router for registration and login
 app.use('/auth', authRouter);
 
 app.listen((process.env.PORT || 9000), () => console.log('App running in port 9000'));

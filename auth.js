@@ -4,6 +4,7 @@ const models = require('./models/mongoose.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+//Checking whether the user is authenticated
 let isAuthenticated = async(req, res, next) => {
     try{
         console.log(req.cookies);
@@ -28,6 +29,7 @@ let isAuthenticated = async(req, res, next) => {
     }
 }
 
+//Checking whether the user is admin
 let isAdmin = async(req, res, next) => {
     try{
         const adminInfo = await models.userModel.findOne({ _id : res.locals.userId });

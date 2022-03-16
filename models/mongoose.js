@@ -70,23 +70,6 @@ const userModel = new mongoose.model('User', userSchema);
 const commentModel = new mongoose.model('Comment', commentSchema);
 const movieModel = new mongoose.model('Movie', movieSchema);
 
-(async function(){
-    const users = await userModel.find();
-    const comments = await commentModel.find();
-    const movies = await movieModel.find();
-
-    // console.log(users);
-    // console.log(comments);
-    // console.log(movies);
-
-    // const admin = await userModel.findOne({ email : "admin@admin.com" });
-    // console.log(admin);
-    // admin.isAdmin = true;
-    // console.log(admin);
-    // await admin.save();
-
-})()
-
 module.exports = {
     userModel,
     commentModel,
