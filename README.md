@@ -4,7 +4,7 @@
 
 - Install [Node.js](https://nodejs.org/en/) version 16.14.0(and above)
 - Install [Git](https://nodejs.org/en/) version 2.29.2(and above)
-- Install [MongoDB](https://nodejs.org/en/) version 2.29.2(and above)
+- Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/) version 5.0.2(and above)
 - Install VS Code and Thunder Client extension or Postman for api testing.
 
 
