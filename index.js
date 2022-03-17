@@ -202,10 +202,11 @@ app.put('/movie/:movieId/:commentId', isAuthenticated, async(req, res) => {
 //Add movie to the db
 app.post('/add_movie', isAuthenticated, isAdmin, async(req, res) => {
     try{
-        const movie_name= req.body.name, movie_year = req.body.year, movie_desc = req.body.description;
+        const movie_name= req.body.name, movie_year = req.body.year, movie_rating = req.body.rating, movie_desc = req.body.description;
         const newMovie = await new models.movieModel({
             name : movie_name,
             year : movie_year,
+            rating : movie_rating,
             description : movie_desc
         })
 
